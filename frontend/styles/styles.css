@@ -74,11 +74,13 @@ html, body {
 }
 
 .left-health {
-    background: linear-gradient(90deg, green, var(--health-color), var(--health-color));
+    /* background: linear-gradient(90deg, green, var(--health-color), var(--health-color)); */
+    background-color: var(--health-color);
 }
 
 .right-health {
-    background: linear-gradient(-90deg, green, var(--health-color), var(--health-color));
+    /* background: linear-gradient(-90deg, green, var(--health-color), var(--health-color)); */
+    background-color: var(--health-color);
 }
 
 .generation {
@@ -153,11 +155,11 @@ html, body {
 .judge {
     position: fixed;
     height: 200px;
-    width: 400px;
+    width: 600px;
     right: 0;
     left: 0;
     margin: auto ;
-    top: 150px;
+    top: 50px;
     display: flex;
     flex-direction: column;
     text-align: center;
@@ -172,7 +174,10 @@ html, body {
 }
 
 .judge p {
-    font-size: 20px;
+    font-size: 45px;
+    font-weight: 800;
+    color: rgb(248, 237, 85);
+    text-shadow: 0 0 9px rgb(248, 194, 16);
 }
 /* ========== ANIMATIONS ========= */
 /* Animación de aparición */
@@ -219,4 +224,19 @@ html, body {
 
 .health-bar {
     animation: health-bar 0.7s ease-in-out;
+}
+
+/* Animación para el juez */
+.judge p {
+    transition: all 0.2s ease;
+}
+
+/* Colores dinámicos para la salud */
+.left-health, .right-health {
+    transition: background-color 0.5s ease, width 0.5s ease;
+}
+
+/* Efecto de ataque en imágenes */
+.col-left.logo, .col-right.logo {
+    transition: filter 0.5s ease;
 }

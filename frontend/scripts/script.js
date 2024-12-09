@@ -23,7 +23,24 @@ document.addEventListener("DOMContentLoaded", () => {
         void element.offsetWidth; // Fuerza reflujo
         element.classList.add(animationClass);
     }
+    function updateHealthBar(healthElement, healthValue) {
+        if (healthValue > 75) {
+            healthElement.style.backgroundColor = "green";
+        } else if (healthValue > 25) {
+            healthElement.style.backgroundColor = "orange";
+        } else {
+            healthElement.style.backgroundColor = "red";
+        }
+    }
 
+    function animateJudgeText() {
+        judgeText.style.color = "red";
+        judgeText.style.fontSize = "48px";
+        setTimeout(() => {
+            judgeText.style.color = "rgb(248, 237, 85)";
+            judgeText.style.fontSize = "45px";
+        }, 400); // Reset style after 500ms
+    }
     
     // Actualiza la interfaz con animaciones sincronizadas
     function updateUI(data) {
@@ -45,16 +62,28 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // Paso 3: Cambia el texto del juez y actualiza las barras de salud después de 2 segundos
         setTimeout(() => {
+
             judgeText.textContent = observations;
+
+            if (status.player1.health <= 0) {
+                judgeText.textContent = 'GANADOR "Yellow-Team"';
+            }
+
+            if (status.player2.health <= 0) {
+                judgeText.textContent = 'GANADOR "Red-Team"';
+            }
+            animateJudgeText();
 
             leftHealth.style.width = `${status.player1.health}%`;
             leftHealth.textContent = `Health: ${status.player1.health}`;
 
             rightHealth.style.width = `${status.player2.health}%`;
             rightHealth.textContent = `Health: ${status.player2.health}`;
+            updateHealthBar(rightHealth, status.player2.health)
+            updateHealthBar(leftHealth, status.player1.health)
         }, 2000);
-        restartAnimation(leftHealth, "health-bar");
-        restartAnimation(rightHealth, "health-bar");
+        // restartAnimation(leftHealth, "health-bar");
+        // restartAnimation(rightHealth, "health-bar");
     }
 
     // Comprueba si el juego ha terminado

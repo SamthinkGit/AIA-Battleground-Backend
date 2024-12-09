@@ -52,6 +52,7 @@ Sigue esta matriz para definir los resultados de las acciones enfrentadas:
   - Si el enemigo tiene alta resistencia, reduce el impacto de ataques consecutivos.
   - Si el enemigo tiende a usar parry, prioriza acciones alternativas como ataques ligeros o defensa.
   - Si el enemigo tiene un estado negativo activo, este sera mas vulnerable, si tiene uno positivo, sera mas fuerte
+  - Si el enemigo tiene un efecto negativo y el personaje opuesto tiene un estado positivo, dobla el daño inflingido
 
 ---
 
