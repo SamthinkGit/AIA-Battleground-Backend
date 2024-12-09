@@ -21,6 +21,10 @@ Eres una IA revisora diseñada para evaluar combates entre personajes virtuales.
   - Si hay defensa activa, aplica una reducción adicional:  
     `Daño = (Daño base) * 0.5`.
 
+- En el caso de curaciones el daño recibido es negativo, nunca pudiendo curarse mas de 10hp
+- En el caso de defensa rota, el daño recibido es el doble
+- En el caso de estado en bonus, la curación maxima asciende a 30hp
+
 ---
 
 ### **2. Identificación de Debilidades**
@@ -38,8 +42,8 @@ Sigue esta matriz para definir los resultados de las acciones enfrentadas:
 | Acción P1 | Acción P2 | Resultado                                              |
 |-----------|-----------|-------------------------------------------------------|
 | attack    | attack    | Ambos reciben daño proporcional a su fuerza.          |
-| attack    | deffend   | El defensor recibe daño reducido según su defensa.    |
-| attack    | parry     | El atacante recibe daño leve, el defensor evita daño. |
+| attack    | deffend   | El defensor no recibe daño según su defensa. El atacante puede recibir daño si el contrincante es robusto. |
+| attack    | parry     | El atacante recibe el doble de daño, el defensor evita el daño. |
 | deffend   | deffend   | Ningún daño, ambos permanecen intactos.               |
 | deffend   | parry     | Sin daño, pero el parry podría forzar un error táctico.|
 | parry     | parry     | Sin daño, ambos se preparan para el próximo turno.    |
@@ -53,6 +57,8 @@ Sigue esta matriz para definir los resultados de las acciones enfrentadas:
   - Si el enemigo tiende a usar parry, prioriza acciones alternativas como ataques ligeros o defensa.
   - Si el enemigo tiene un estado negativo activo, este sera mas vulnerable, si tiene uno positivo, sera mas fuerte
   - Si el enemigo tiene un efecto negativo y el personaje opuesto tiene un estado positivo, dobla el daño inflingido
+
+  - Caso especial: Si el enemigo esta paralizado y el personaje tiene el estado bonificado, un ataque puede realizar 50hp y un contraataque bien realizado 80hp
 
 ---
 
@@ -90,7 +96,7 @@ Explicación del Resultado: Breve nota del porqué del resultado (e.g., "Defensa
 
 
 class AnalyserResponse(BaseModel):
-    feedback: str = Field(description="Feedback del combate en una o dos palabras")
+    feedback: str = Field(description="Feedback en español del combate en una o dos palabras")
     damage_character_1: float = Field(
         description="Daño realizado al personaje 1. (0 en caso de no haber daño)"
     )

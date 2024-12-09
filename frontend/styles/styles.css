@@ -83,6 +83,11 @@ html, body {
     background-color: var(--health-color);
 }
 
+.state {
+    margin-top: -60px;
+    margin-left: 20px;
+    margin-right: 20px;
+}
 .generation {
     text-shadow: 0 0 10px black;
     -webkit-text-stroke: 0;
@@ -239,4 +244,17 @@ html, body {
 /* Efecto de ataque en imágenes */
 .col-left.logo, .col-right.logo {
     transition: filter 0.5s ease;
+}
+
+
+/* Estados de los jugadores */
+.state.left, .state.right {
+    font-size: 30px;
+    color: white;
+    transition: color 0.4s ease, font-size 0.4s ease;
+}
+
+/* Animación para los estados */
+.state.left, .state.right {
+    transition: all 0.4s ease;
 }

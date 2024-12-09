@@ -30,6 +30,8 @@ class Game:
         dmg_1, dmg_2, obs, sts1, sts2 = combat(action_1, action_2, *status)
         self.player1.health -= dmg_1
         self.player2.health -= dmg_2
+        self.player1.health = min(self.player1.health, 100)
+        self.player2.health = min(self.player2.health, 100)
         self.player1.status = sts1
         self.player2.status = sts2
         print(f"Obs: {obs}")

@@ -14,6 +14,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const roundNumber = document.querySelector(".round h2");
     const startButton = document.querySelector(".button h2");
 
+    const leftState = document.querySelector(".state.left");
+    const rightState = document.querySelector(".state.right");
+
     let currentRound = 1;
 
     // Reinicia la animación de un elemento
@@ -40,6 +43,14 @@ document.addEventListener("DOMContentLoaded", () => {
             judgeText.style.color = "rgb(248, 237, 85)";
             judgeText.style.fontSize = "45px";
         }, 400); // Reset style after 500ms
+    }
+    function animateState(stateElement) {
+        stateElement.style.color = "cyan";
+        stateElement.style.fontSize = "32px";
+        setTimeout(() => {
+            stateElement.style.color = "white";
+            stateElement.style.fontSize = "30px";
+        }, 400); // Reset style after 400ms
     }
     
     // Actualiza la interfaz con animaciones sincronizadas
@@ -84,6 +95,24 @@ document.addEventListener("DOMContentLoaded", () => {
         }, 2000);
         // restartAnimation(leftHealth, "health-bar");
         // restartAnimation(rightHealth, "health-bar");
+
+        // Actualiza el estado de los jugadores
+        setTimeout(() => {
+            if (status.player1.status && status.player1.status !== "None") {
+                leftState.textContent = status.player1.status;
+                animateState(leftState);
+            } else {
+                leftState.textContent = "Neutral"; // Oculta el estado si es "None"
+            }
+
+            if (status.player2.status && status.player2.status !== "None") {
+                rightState.textContent = status.player2.status;
+                animateState(rightState);
+            } else {
+                rightState.textContent = "Neutral"; // Oculta el estado si es "None"
+            }
+        }, 3000);
+
     }
 
     // Comprueba si el juego ha terminado
