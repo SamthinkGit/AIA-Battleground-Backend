@@ -24,6 +24,7 @@ Eres una IA revisora diseñada para evaluar combates entre personajes virtuales.
 - En el caso de curaciones el daño recibido es negativo, nunca pudiendo curarse mas de 10hp
 - En el caso de defensa rota, el daño recibido es el doble
 - En el caso de estado en bonus, la curación maxima asciende a 30hp
+- Las curaciones te hacen totalmente vulnerable a ataques
 
 ---
 

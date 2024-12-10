@@ -6,27 +6,22 @@ from langchain_openai import ChatOpenAI
 def p1_wrapper():
     print = lambda *args, **kwargs: None
 
+    # START
     # ===================================== WRAPPER ==================================
     # Al final esto es un copy paste de la ultima seccion, probably les diga que hay que usar ese para que no se compliquen demasiado si no saben python.
     # AL igual, todo lo que sea programar que pregunten que tampoco pasa nada
 
     class NanoPortal(BaseModel):
-        attack: str = Field(
-            description="(Respuesta de aprox 10 palabras) Aprovecha el mareo y las formas de los portales para hacer daño a tu enemigo."
-        )
-        defend: str = Field(
-            description="(Respuesta de aprox 10 palabras) Usar portales para prevenir un ataque que pueda venir de algun enemigo!"
-        )
-        parry: str = Field(
-            description="(Respuesta de aprox 10 palabras) Aprovecha para contraatacar con la habilidad mas original y creativa que veas posible con tus habilidades!"
-        )
+        attack: str = Field(description="(Respuesta de aprox 10 palabras) Haz un ataque de mimos, el corazon del enemigo quedara expuesto")
+        defend: str = Field(description="(Respuesta de aprox 10 palabras) Cambias las reglas del juego, ahora el daño recibido se convierte en vida para ti. Esto es la ley Pulpi!")
+        parry: str = Field(description="(Respuesta de aprox 10 palabras) Paraliza al enemigo a base de ternura, convierte el daño enemigo en poder Pulpito!")
+
 
     pj = ChatOpenAI(model="gpt-4o-mini").with_structured_output(NanoPortal)
     prompt = """
-    Es tu momento de luchar! Utiliza tus portales para atacar al enemigo y cortarle en sus puntos mas debiles. Manten invocando portales para
-    esquivar los posibles ataques y si lo ves apropiado, haz un portal al vacio para pillar desprevenido a tu enemigo"""  # ... La creatividad se la dejo a ellos xD
+    Es tu momento de luchar! Eres un peluche pulpito! Utiliza tus ataques de forma creativa para matar al enemigo!""" # ... La creatividad se la dejo a ellos xD
 
-    description = "Este personaje es un hechicero de tamaño nano atomico que es capaz de crear portales para atacar a sus enemigos"
+    # description="Este personaje es un hechicero de tamaño nano atomico que es capaz de crear portales para atacar a sus enemigos"
 
     response = pj.invoke(prompt)
 
@@ -34,46 +29,48 @@ def p1_wrapper():
     print("Defensa: ", response.defend, "\n")
     print("Contraataque: ", response.parry)
     # ==================================================================================
+    # END
 
-    return choice(response)     
+    return choice(response)
 
 
 def p2_wrapper():
     print = lambda *args, **kwargs: None
 
+    # START
     # ===================================== WRAPPER ==================================
-    # Al final esto es un copy paste de la ultima seccion, probably les diga que hay que usar ese para que no se compliquen demasiado si no saben python.
-    # AL igual, todo lo que sea programar que pregunten que tampoco pasa nada
+    class NanoPortal(BaseModel):
+        attack: str = Field(description="(Respuesta de aprox 10 palabras) Dispara miel venenosa por todo el alrededor, envenenando y paralizando a todo lo que toca excepto a si mismo")
+        defend: str = Field(description="(Respuesta de aprox 10 palabras) Lanza un escudo mágico que protege y le vuelve invisible, escondiendole del enemigo. El escudo también te cura y da fuerzas para atacar")
+        parry: str = Field(description="(Respuesta de aprox 10 palabras) Antes de que el enemigo reaccione le ataca con millones de zarpazos por todas partes dejandole debilitado, aturdido y cegado")
 
-    class ShadowDancer(BaseModel):
-        attack: str = Field(
-            description="(Respuesta de aprox 10 palabras) Usa sombras para confundir al enemigo y atacar rápidamente."
-        )
-        defend: str = Field(
-            description="(Respuesta de aprox 10 palabras) Usa tu escudo y curate lo mas rapido posible."
-        )
-        parry: str = Field(
-            description="(Respuesta de aprox 10 palabras) Desvía el ataque y responde con un golpe en las sombras."
-        )
 
-    pj = ChatOpenAI(model="gpt-4o-mini").with_structured_output(ShadowDancer)
+    pj = ChatOpenAI(model="gpt-4o-mini").with_structured_output(NanoPortal)
     prompt = """
-    Eres un maestro de las sombras. Usa tu habilidad para atacar desde ángulos inesperados, confundir a tus enemigos y mantenerte siempre fuera de su alcance. Si te ves acorralado, desaparece en las sombras y vuelve a aparecer en el lugar más inesperado para contraatacar con precisión quirúrgica.
-    """
+    Eres un guerrero mítico con el unico objetivo de derrotar a tu enemigo antes de que reaccione, curandete cuando sea necesario.
+    """ # ... La creatividad se la dejo a ellos xD
 
-    description = "Este personaje es un ninja que utiliza las sombras como extensión de su cuerpo para atacar y defenderse."
+    description="Eres el mejor peluche guerrero del mundo, mitad gato, mitad tortitas. "
 
     response = pj.invoke(prompt)
 
     print("Ataque: ", response.attack, "\n")
     print("Defensa: ", response.defend, "\n")
     print("Contraataque: ", response.parry)
-
-
     # ==================================================================================
+    # END
 
     return choice(response)
 
 
 def choice(response):
-    return random.choice([("Attack", response.attack), ("Defend", response.defend), ("Parry", response.parry)])
+    return random.choice(
+        [
+            ("Attack", response.attack),
+            ("Defend", response.defend),
+            ("Parry", response.parry),
+        ]
+    )
+
+
+# TODO: Cortar el maximo response de cada jugador
