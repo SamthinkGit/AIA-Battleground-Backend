@@ -33,7 +33,7 @@
 
 1. Clone this repository:
    ```bash
-   git clone <REPOSITORY_URL>
+   git clone https://github.com/SamthinkGit/AIA-Battleground-Backend/edit/main/README.md
    cd AIA-Battleground-Backend
    ```
 
